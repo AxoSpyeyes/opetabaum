@@ -1,0 +1,173 @@
+{
+    "ko": {
+        "0e8cae79-97a5-41eb-b176-32c4f1287413": {
+            "uuid": "0e8cae79-97a5-41eb-b176-32c4f1287413",
+            "kakutro": [
+                "dua",
+                "duwa"
+            ],
+            "kofal": "suruko"
+        },
+        "d635cf76-d6fc-419d-91d9-b41e48ea2495": {
+            "uuid": "d635cf76-d6fc-419d-91d9-b41e48ea2495",
+            "kakutro": [
+                "dua",
+                "duwa"
+            ],
+            "kofal": "tingko"
+        },
+        "a1609c91-ed74-48c4-b33d-9e6a106e657a": {
+            "uuid": "a1609c91-ed74-48c4-b33d-9e6a106e657a",
+            "kakutro": [
+                "du"
+            ],
+            "kofal": "djinko"
+        },
+        "b53828fe-6d8b-4a68-a3b1-709781450776": {
+            "uuid": "b53828fe-6d8b-4a68-a3b1-709781450776",
+            "kakutro": [
+                "un",
+                "yn"
+            ],
+            "kofal": "djinko"
+        },
+        "8ddc7ae4-efbb-4626-8245-3480e9cd97a3": {
+            "uuid": "8ddc7ae4-efbb-4626-8245-3480e9cd97a3",
+            "kakutro": [
+                "una",
+                "yna"
+            ],
+            "kofal": "djinko"
+        },
+        "90460ea6-c0fe-49dc-9765-1d8af918e3ba": {
+            "uuid": "90460ea6-c0fe-49dc-9765-1d8af918e3ba",
+            "kakutro": [
+                "una",
+                "unna"
+            ],
+            "kofal": "plazko"
+        },
+        "55d9d504-37c9-46e2-af1d-f03f53406067": {
+            "uuid": "55d9d504-37c9-46e2-af1d-f03f53406067",
+            "kakutro": [
+                "-ena",
+                "-jena"
+            ],
+            "kofal": "kawariko"
+        },
+        "c6c39421-2443-4fd1-9012-64b56501c549": {
+            "uuid": "c6c39421-2443-4fd1-9012-64b56501c549",
+            "kakutro": [
+                "noi",
+                "neo"
+            ],
+            "kofal": "likko"
+        },
+        "43a62414-2d98-436b-b4b1-ea399b92ef14": {
+            "uuid": "43a62414-2d98-436b-b4b1-ea399b92ef14",
+            "kakutro": [
+                "nene"
+            ],
+            "kofal": "tingko"
+        }
+    },
+    "ttb": {
+        "8e7b1357-825f-475a-a35c-7351684f48de": {
+            "uuid": "8e7b1357-825f-475a-a35c-7351684f48de",
+            "fras": "{0} {1}",
+            "zunaga": [
+                {
+                    "ko": "duan",
+                    "konen": [
+                        "0e8cae79-97a5-41eb-b176-32c4f1287413",
+                        "b53828fe-6d8b-4a68-a3b1-709781450776"
+                    ]
+                },
+                {
+                    "ko": "du",
+                    "konen": [
+                        "a1609c91-ed74-48c4-b33d-9e6a106e657a"
+                    ]
+                }
+            ]
+        },
+        "193e0b78-0f29-4c61-81f1-32ba06fd212b": {
+            "uuid": "193e0b78-0f29-4c61-81f1-32ba06fd212b",
+            "fras": "{0} {1}",
+            "zunaga": [
+                {
+                    "ko": "du",
+                    "konen": [
+                        "a1609c91-ed74-48c4-b33d-9e6a106e657a"
+                    ]
+                },
+                {
+                    "ko": "duaena",
+                    "konen": [
+                        "0e8cae79-97a5-41eb-b176-32c4f1287413",
+                        "55d9d504-37c9-46e2-af1d-f03f53406067"
+                    ]
+                }
+            ]
+        },
+        "804c94dc-2da4-4b7a-9b48-722e146e81e9": {
+            "uuid": "804c94dc-2da4-4b7a-9b48-722e146e81e9",
+            "fras": "{0} {1} {2}",
+            "zunaga": [
+                {
+                    "ko": "du",
+                    "konen": [
+                        "a1609c91-ed74-48c4-b33d-9e6a106e657a"
+                    ]
+                },
+                {
+                    "ko": "una",
+                    "konen": [
+                        "8ddc7ae4-efbb-4626-8245-3480e9cd97a3"
+                    ]
+                },
+                {
+                    "ko": "duwa",
+                    "konen": [
+                        "d635cf76-d6fc-419d-91d9-b41e48ea2495"
+                    ]
+                }
+            ]
+        },
+        "dad3cc81-e99c-4b38-af70-7e2297cf7749": {
+            "uuid": "dad3cc81-e99c-4b38-af70-7e2297cf7749",
+            "fras": "{0} {1} {2}!",
+            "zunaga": [
+                {
+                    "ko": "du",
+                    "konen": [
+                        "a1609c91-ed74-48c4-b33d-9e6a106e657a"
+                    ]
+                },
+                {
+                    "ko": "una",
+                    "konen": [
+                        "90460ea6-c0fe-49dc-9765-1d8af918e3ba"
+                    ]
+                },
+                {
+                    "ko": "un",
+                    "konen": [
+                        "b53828fe-6d8b-4a68-a3b1-709781450776"
+                    ]
+                }
+            ]
+        }
+    },
+    "brukdjin": {
+        "cccb6515-8e78-406c-a68f-2999a2231236": {
+            "uuid": "cccb6515-8e78-406c-a68f-2999a2231236",
+            "namai": "axodjin",
+            "sjirujena_ko": [
+                "a1609c91-ed74-48c4-b33d-9e6a106e657a",
+                "b53828fe-6d8b-4a68-a3b1-709781450776",
+                "8ddc7ae4-efbb-4626-8245-3480e9cd97a3"
+            ]
+        }
+    }
+}
