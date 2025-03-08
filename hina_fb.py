@@ -33,6 +33,7 @@ class Ko(Resource):
         laksu = min(laksu, len(docs))
         for i in range(0,laksu):
             svar.append(docs[i].to_dict())
+            svar[i]["id"] = docs[i].id
         return jsonify(svar)
 
     def post(self):
