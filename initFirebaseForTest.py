@@ -79,3 +79,7 @@ def reset_brukdjin():
     delete_brukdjin()
     add_brukdjin()
 
+def reset_everything():
+    reset_ko()
+    reset_ttb()
+    reset_brukdjin()
