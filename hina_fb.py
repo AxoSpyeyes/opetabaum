@@ -65,6 +65,7 @@ class Ttb(Resource):
         laksu = min(laksu, len(docs))
         for i in range(0,laksu):
             svar.append(docs[i].to_dict())
+            svar[i]["id"] = docs[i].id
         return jsonify(svar)
 
     def post(self):
@@ -98,6 +99,8 @@ class Brukdjin(Resource): # this is just copied from ko right now, but needs to 
         laksu = min(laksu, len(docs))
         for i in range(0,laksu):
             svar.append(docs[i].to_dict())
+            svar[i]["id"] = docs[i].id
+
         return jsonify(svar)
 
     def post(self):
