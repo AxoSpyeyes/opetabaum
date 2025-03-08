@@ -7,6 +7,9 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 import os
 
+from model.ko import Ko, KoSchema
+
+
 simper_svar_laksu = 10
 
 cred = credentials.Certificate("./serviceAccountKey.json") #Update with your path.
@@ -38,11 +41,12 @@ class Ko(Resource):
 
     def post(self):
         try:
-            data = request.get_json()  # Get data from the request
-            db.collection('ko').add(data)
-            return jsonify({'message': 'Data added successfully'})
+            ko = KoSchema().load(request.get_json())
+            updated_time, doc_ref = db.collection('ko').add(ko)
         except Exception as e:
             return jsonify({'error': str(e)})
+        ko["id"] = doc_ref.id
+        return jsonify(ko)
 
 class Ko_id(Resource):
     def get(self, id):
