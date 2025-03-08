@@ -3,10 +3,6 @@ from flask_restful import Api, Resource
 from suha import Kotoli  
 from mellan import format_fras  
 
-import firebase_admin
-from firebase_admin import credentials, firestore
-from google.cloud.firestore_v1 import aggregation
-from google.cloud.firestore_v1.base_query import FieldFilter
 import os
 
 from model.ko import Ko, KoSchema
@@ -14,13 +10,9 @@ from model.ko import Ko, KoSchema
 
 simper_svar_laksu = 10
 
-cred = credentials.Certificate("./serviceAccountKey.json") #Update with your path.
-try:
-    firebase_admin.initialize_app(cred)
-    db = firestore.client()  #Get a Firestore client
-    print(" 🔥 Firebase initialized successfully")
-except Exception as e:
-    print(f"Error initializing Firebase: {e}")
+from firestore_db import Database
+db2 = Database()
+db = db2.db # hack to not break old code
 
 
 
