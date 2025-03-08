@@ -43,9 +43,9 @@ def delete_brukdjin():
 
 
 def add_ko():
-    for ko in kotoli.kirain_kaban["ko"].values():
+    for id, ko in kotoli.kirain_kaban["ko"].items():
         try:
-            db.collection('ko').add(ko)
+            db.collection('ko').document(id).set(ko)
             print(f'"{ko["kakutro"][0]}" dan tullajena ko-kaban made!')
         except Exception as e:
             print(str(e))
@@ -83,3 +83,5 @@ def reset_everything():
     reset_ko()
     reset_ttb()
     reset_brukdjin()
+
+reset_everything()
