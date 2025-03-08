@@ -5,6 +5,8 @@ from mellan import format_fras
 
 import firebase_admin
 from firebase_admin import credentials, firestore
+from google.cloud.firestore_v1 import aggregation
+from google.cloud.firestore_v1.base_query import FieldFilter
 import os
 
 from model.ko import Ko, KoSchema
@@ -40,12 +42,24 @@ class Ko(Resource):
         return jsonify(svar)
 
     def post(self):
+        collection_ref = db.collection("ko")
+        # Load and vallidate request payload
         try:
             ko = KoSchema().load(request.get_json())
-            updated_time, doc_ref = db.collection('ko').add(ko)
+        except Exception as e:
+            return jsonify({'error': str(e)}
+            )
+        # Determine id from namai sequence number
+        ko["namai"] = ko["kakutro"][0]
+        query = collection_ref.where(filter=FieldFilter("namai", "==", ko["namai"])).count(alias="all")        
+        for result in query.get():
+            id = ko["namai"] + "-" + str(result[0].value + 1)
+        # Write ko to firestore
+        try:
+            collection_ref.document(id).set(ko)
         except Exception as e:
             return jsonify({'error': str(e)})
-        ko["id"] = doc_ref.id
+        ko["id"] = id
         return jsonify(ko)
 
 class Ko_id(Resource):

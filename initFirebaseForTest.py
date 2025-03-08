@@ -44,6 +44,7 @@ def delete_brukdjin():
 
 def add_ko():
     for id, ko in kotoli.kirain_kaban["ko"].items():
+        ko["namai"] = ko["kakutro"][0]
         try:
             db.collection('ko').document(id).set(ko)
             print(f'"{ko["kakutro"][0]}" dan tullajena ko-kaban made!')
