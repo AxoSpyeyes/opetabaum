@@ -3,22 +3,17 @@ from flask_restful import Api, Resource
 from suha import Kotoli  
 from mellan import format_fras  
 
-import firebase_admin
-from firebase_admin import credentials, firestore
 import os
 
 from model.ko import Ko, KoSchema
+from model.params import Params, ParamsSchema
 
 
 simper_svar_laksu = 10
 
-cred = credentials.Certificate("./serviceAccountKey.json") #Update with your path.
-try:
-    firebase_admin.initialize_app(cred)
-    db = firestore.client()  #Get a Firestore client
-    print(" 🔥 Firebase initialized successfully")
-except Exception as e:
-    print(f"Error initializing Firebase: {e}")
+from firestore_db import Database
+db2 = Database()
+db = db2.db # hack to not break old code
 
 
 
@@ -27,25 +22,32 @@ api = Api(app)
 kotoli = Kotoli()
 
 class Ko(Resource):
-    def get(self):
-        
-        docs = db.collection('ko').get()
-        
-        svar = []
-        laksu:int = int(request.args.get('laksu') or simper_svar_laksu)
-        laksu = min(laksu, len(docs))
-        for i in range(0,laksu):
-            svar.append(docs[i].to_dict())
-            svar[i]["id"] = docs[i].id
-        return jsonify(svar)
 
-    def post(self):
+    def get(self):
+        # Load and vallidate request payload
         try:
-            ko = KoSchema().load(request.get_json())
-            updated_time, doc_ref = db.collection('ko').add(ko)
+            params = ParamsSchema().load(request.args.to_dict())
         except Exception as e:
             return jsonify({'error': str(e)})
-        ko["id"] = doc_ref.id
+        
+        try: 
+            response = db2.get_docs("ko", params)
+            return jsonify(response)
+        except Exception as e:
+            return jsonify({'error': str(e)})       
+
+    def post(self):
+        # Load and vallidate request payload
+        try:
+            ko = KoSchema().load(request.get_json())
+        except Exception as e:
+            return jsonify({'error': str(e)})
+        
+        # Determine id from namai sequence number
+        namaicount = db2.count_value("ko", "namai", ko["namai"])
+        ko["id"] = ko["namai"] + "-" + str((namaicount + 1))
+        # Write ko to firestore
+        ko = db2.insert_doc(ko)
         return jsonify(ko)
 
 class Ko_id(Resource):
