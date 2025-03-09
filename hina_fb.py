@@ -6,6 +6,7 @@ from mellan import format_fras
 import os
 
 from model.ko import Ko, KoSchema
+from model.params import Params, ParamsSchema
 
 
 simper_svar_laksu = 10
@@ -21,26 +22,27 @@ api = Api(app)
 kotoli = Kotoli()
 
 class Ko(Resource):
+
     def get(self):
+        # Load and vallidate request payload
+        try:
+            params = ParamsSchema().load(request.args.to_dict())
+        except Exception as e:
+            return jsonify({'error': str(e)})
         
-        docs = db.collection('ko').get()
-        
-        svar = []
-        laksu:int = int(request.args.get('laksu') or simper_svar_laksu)
-        laksu = min(laksu, len(docs))
-        for i in range(0,laksu):
-            svar.append(docs[i].to_dict())
-            svar[i]["id"] = docs[i].id
-        return jsonify(svar)
+        try: 
+            response = db2.get_docs("ko", params)
+            return jsonify(response)
+        except Exception as e:
+            return jsonify({'error': str(e)})       
 
     def post(self):
-        collection_ref = db.collection("ko")
         # Load and vallidate request payload
         try:
             ko = KoSchema().load(request.get_json())
         except Exception as e:
-            return jsonify({'error': str(e)}
-            )
+            return jsonify({'error': str(e)})
+        
         # Determine id from namai sequence number
         namaicount = db2.count_value("ko", "namai", ko["namai"])
         ko["id"] = ko["namai"] + "-" + str((namaicount + 1))

@@ -15,6 +15,17 @@ class Database(object):
         except Exception as e:
             print(f"Error initializing Firebase: {e}")
         self.db = db
+        self.default_limit = 10
+
+    def get_docs(self, collection, params = {}):
+        docs = self.db.collection(collection).get()
+        limit = int(params["limit"] or self.default_limit)
+        limit = min(limit, len(docs))
+        response = []
+        for i in range(0,limit):
+            response.append(docs[i].to_dict())
+            response[i]["id"] = docs[i].id
+        return response
 
     def delete_all_docs(self, collection):
         # Delete all documents in a collection
@@ -65,6 +76,7 @@ class Database(object):
         return doc
     
     def count_value (self, collection, field, value):
+        # To-do: Check if field is a an array and in that case do an array search
         try:
             query = self.db.collection(collection).where(filter=FieldFilter(field, "==", value))
             aggregate_query = aggregation.AggregationQuery(query)
