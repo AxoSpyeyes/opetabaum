@@ -1,6 +1,7 @@
 {
     "ko": {
         "dua-1": {
+            "namai":"dua", 
             "kakutro": [
                 "dua",
                 "duwa"
@@ -8,6 +9,7 @@
             "kofal": "suruko"
         },
         "dua-2": {
+            "namai":"dua",
             "kakutro": [
                 "dua",
                 "duwa"
@@ -15,12 +17,14 @@
             "kofal": "tingko"
         },
         "du-1": {
+            "namai":"du",
             "kakutro": [
                 "du"
             ],
             "kofal": "djinko"
         },
         "un-1": {
+            "namai":"un",
             "kakutro": [
                 "un",
                 "yn"
@@ -28,6 +32,7 @@
             "kofal": "djinko"
         },
         "una-1": {
+            "namai":"una",
             "kakutro": [
                 "una",
                 "yna"
@@ -35,6 +40,7 @@
             "kofal": "djinko"
         },
         "una-2": {
+            "namai":"una",
             "kakutro": [
                 "una",
                 "unna"
@@ -42,6 +48,7 @@
             "kofal": "plazko"
         },
         "-ena-1": {
+            "namai":"-ena",
             "kakutro": [
                 "-ena",
                 "-jena"
@@ -49,6 +56,7 @@
             "kofal": "kawariko"
         },
         "noi-1": {
+            "namai":"noi",
             "kakutro": [
                 "noi",
                 "neo"
@@ -56,6 +64,7 @@
             "kofal": "likko"
         },
         "nene-1": {
+            "namai":"nene",
             "kakutro": [
                 "nene"
             ],
