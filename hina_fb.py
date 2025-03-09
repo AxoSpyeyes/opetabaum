@@ -42,16 +42,10 @@ class Ko(Resource):
             return jsonify({'error': str(e)}
             )
         # Determine id from namai sequence number
-        ko["namai"] = ko["kakutro"][0]
-        query = collection_ref.where(filter=FieldFilter("namai", "==", ko["namai"])).count(alias="all")        
-        for result in query.get():
-            id = ko["namai"] + "-" + str(result[0].value + 1)
+        namaicount = db2.count_value("ko", "namai", ko["namai"])
+        ko["id"] = ko["namai"] + "-" + str((namaicount + 1))
         # Write ko to firestore
-        try:
-            collection_ref.document(id).set(ko)
-        except Exception as e:
-            return jsonify({'error': str(e)})
-        ko["id"] = id
+        ko = db2.insert_doc(ko)
         return jsonify(ko)
 
 class Ko_id(Resource):
