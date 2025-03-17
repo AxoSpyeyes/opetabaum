@@ -52,7 +52,7 @@ class Database(object):
     
     def insert_doc(self, doc):
         # Insert a doc to the database
-        if "id" in doc: # Insert object if an id is present 
+        if doc["id"] is not None: # Insert object if an id is present 
             doc = self.set_doc(doc)
             return doc
         else: # Otherwise add
