@@ -43,7 +43,7 @@ def delete_brukdjin():
 
 
 def add_ko():
-    for id, ko in kotoli.kirain_kaban["ko"].items():
+    for id, ko in kotoli.tumam["ko"].items():
         try:
             db.collection('ko').document(id).set(ko)
             print(f'"{ko["kakutro"][0]}" dan tullajena ko-kaban made!')
@@ -51,7 +51,7 @@ def add_ko():
             print(str(e))
 
 def add_ttb():
-    for ttb in kotoli.kirain_kaban["ttb"].values():
+    for ttb in kotoli.tumam["ttb"].values():
         try:
             db.collection('ttb').add(ttb)
             print(f'"{format_fras(ttb)}" dan tullajena ttb-kaban made!')
@@ -59,7 +59,7 @@ def add_ttb():
             print(str(e))
 
 def add_brukdjin():
-    for brukdjin in kotoli.kirain_kaban["brukdjin"].values():
+    for brukdjin in kotoli.tumam["brukdjin"].values():
         try:
             db.collection('brukdjin').add(brukdjin)
             print(f'"{brukdjin["namai"]}" dan tullajena brudjin-kaban made!')

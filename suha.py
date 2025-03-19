@@ -7,26 +7,26 @@ class Kotoli :
 
     def read_data(self):
         with open('data.json', 'r') as f:
-            self.kirain_kaban = json.load(f)
+            self.tumam = json.load(f)
 
     def update_data(self):
         with open('data.json','w') as f:
-            json.dump(self.kirain_kaban, f)
+            json.dump(self.tumam, f)
 
     def hosoimah(self,kaban):
         return [ting for unakaban in kaban for ting in unakaban]
 
     def sada_ko(self, ko_uuid):
         self.read_data()
-        return self.kirain_kaban["ko"][ko_uuid]
+        return self.tumam["ko"][ko_uuid]
 
     def sada_ttb(self, ttb_uuid):
         self.read_data()
-        return self.kirain_kaban["ttb"][ttb_uuid]
+        return self.tumam["ttb"][ttb_uuid]
 
     def sada_brukdjin(self, brukdjin_uuid):
         self.read_data()
-        return self.kirain_kaban["brukdjin"][brukdjin_uuid]
+        return self.tumam["brukdjin"][brukdjin_uuid]
 
     def sada_konen(self, ttb_uuid):
         self.read_data()
@@ -41,7 +41,7 @@ class Kotoli :
     def suha_ko(self, suhajena_ko = "", kofal = ""):
         self.read_data()
         svar = []
-        for ko in self.kirain_kaban["ko"].values():
+        for ko in self.tumam["ko"].values():
             if ((suhajena_ko in ko["kakutro"] or suhajena_ko == "") and (kofal == ko["kofal"] or kofal == "")):
                 svar.append(ko)
         return svar
@@ -49,7 +49,7 @@ class Kotoli :
     def suha_ttb_uuid(self, ko_uuid):
         self.read_data()
         svar = []
-        for ttb in self.kirain_kaban["ttb"].values():
+        for ttb in self.tumam["ttb"].values():
             for ko in ttb["zunaga"]:
                 if ko_uuid in ko["konen"]:
                     svar.append(ttb)
@@ -66,7 +66,7 @@ class Kotoli :
 
     def suha_brukdjin(self, namai):
         self.read_data()
-        for brukdjin in self.kirain_kaban["brukdjin"].values():
+        for brukdjin in self.tumam["brukdjin"].values():
             if brukdjin["namai"] == namai:
                 return brukdjin
 
@@ -80,7 +80,7 @@ class Kotoli :
     
     def suha_brukdjin_ko_uuid(self, ko_uuid):
         svar = []
-        for brukdjin in self.kirain_kaban["brukdjin"].values():
+        for brukdjin in self.tumam["brukdjin"].values():
             print
             if ko_uuid in brukdjin["sjirujena_ko"]:
                 svar.append(brukdjin)
@@ -88,23 +88,23 @@ class Kotoli :
 
     def sada_fsjtozma(self, brukdjin_uuid, ko_uuid):
         self.read_data()
-        return ko_uuid in self.kirain_kaban["brukdjin"][brukdjin_uuid]["sjirujena_ko"]
+        return ko_uuid in self.tumam["brukdjin"][brukdjin_uuid]["sjirujena_ko"]
 
     def maha_fsjto(self, brukdjin_uuid, ko_uuid, fsjto = True):
         self.read_data()
         # lera
         if self.sada_fsjtozma(brukdjin_uuid,ko_uuid) and not fsjto:
-            self.kirain_kaban["brukdjin"][brukdjin_uuid]["sjirujena_ko"].remove(ko_uuid)
+            self.tumam["brukdjin"][brukdjin_uuid]["sjirujena_ko"].remove(ko_uuid)
         # vasu
         elif not self.sada_fsjtozma(brukdjin_uuid,ko_uuid) and fsjto:
-            self.kirain_kaban["brukdjin"][brukdjin_uuid]["sjirujena_ko"].append(ko_uuid)
+            self.tumam["brukdjin"][brukdjin_uuid]["sjirujena_ko"].append(ko_uuid)
         self.update_data()
 
 
     def maha_ko(self, kakutro, kofal):
         self.read_data()
         UUID = str(uuid.uuid4())
-        self.kirain_kaban["ko"][UUID] = {"uuid":UUID, "kakutro":kakutro, "kofal":kofal}
+        self.tumam["ko"][UUID] = {"uuid":UUID, "kakutro":kakutro, "kofal":kofal}
         self.update_data()
 
     # TODO v
@@ -112,12 +112,12 @@ class Kotoli :
         self.read_data()
         UUID = str(uuid.uuid4())
         ko_uuid = list(set(self.hosoimah(zunaga)))
-        self.kirain_kaban["ttb"][UUID] = {"uuid":UUID, 'fras':fras, "zunaga":zunaga, "ko_uuid":ko_uuid}
+        self.tumam["ttb"][UUID] = {"uuid":UUID, 'fras':fras, "zunaga":zunaga, "ko_uuid":ko_uuid}
         # this has got to be like a wizard, bc its difficult
 
     def maha_brukdjin(self, namai):
         self.read_data()
         UUID = str(uuid.uuid4())
-        self.kirain_kaban["brukdjin"][UUID] = {"uuid":UUID, "namai":namai, "sjirujena_ko":[]}
+        self.tumam["brukdjin"][UUID] = {"uuid":UUID, "namai":namai, "sjirujena_ko":[]}
         self.update_data()
 
