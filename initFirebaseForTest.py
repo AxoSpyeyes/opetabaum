@@ -1,17 +1,9 @@
 from suha import Kotoli  
 from mellan import format_fras  
 
-import firebase_admin
-from firebase_admin import credentials, firestore
+from firestore_db import Database
+db = Database()
 
-cred = credentials.Certificate("./serviceAccountKey.json") #Update with your path.
-
-try:
-    firebase_admin.initialize_app(cred)
-    db = firestore.client()  #Get a Firestore client
-    print(" 🔥 Firebase initialized successfully")
-except Exception as e:
-    print(f"Error initializing Firebase: {e}")
 kotoli = Kotoli()
 
 def delete_ko():
@@ -68,16 +60,16 @@ def add_brukdjin():
 
 
 def reset_ko():
-    delete_ko()
-    add_ko()
+    print(db.delete_all_docs("ko"))
+    print (db.batch_insert_docs("ko", kotoli.tumam["ko"]))
 
 def reset_ttb():
-    delete_ttb()
-    add_ttb()
+    print(db.delete_all_docs("ttb"))
+    print (db.batch_insert_docs("ttb", kotoli.tumam["ttb"]))
 
 def reset_brukdjin():
-    delete_brukdjin()
-    add_brukdjin()
+    print(db.delete_all_docs("brukdjin"))
+    print (db.batch_insert_docs("brukdjin", kotoli.tumam["brukdjin"]))
 
 def reset_everything():
     reset_ko()
