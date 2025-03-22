@@ -16,6 +16,20 @@ class Database(object):
             print(f"Error initializing Firebase: {e}")
         self.db = db
         self.default_limit = 10
+    
+    def get_doc_by_id(self, collection:str, doc_id:str):
+        try:
+            doc_ref = self.db.collection(collection).document(doc_id)
+            doc = doc_ref.get()
+            if doc.exists:
+                data = doc.to_dict()
+                data["id"] = doc_id
+                return data
+            else:
+                return None
+        except Exception as e:
+            print(str(e))
+            return None
 
     def get_docs(self, collection, params = {}):
         docs = self.db.collection(collection).get()
